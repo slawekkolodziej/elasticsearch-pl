@@ -1,0 +1,7 @@
+discovery:
+  type: consul
+  consul:
+    service-names: ["CONSUL_SERVICE_NAME"]
+    healthy: true
+    local-ws-port:  8500
+    local-ws-host:  localhost
