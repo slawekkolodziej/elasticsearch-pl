@@ -44,7 +44,7 @@ sed -i "s/ELASTICSEARCH_USER/${ELASTICSEARCH_USER}/g" "/usr/share/elasticsearch/
 sed -i "s/ELASTICSEARCH_PASS/${ELASTICSEARCH_PASS}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
 
 SERVICE_CONFIG=$(cat /usr/share/elasticsearch/elasticsearch-service.json)
-CONSUL_RESP=$(curl -X PUT -d "$SERVICE_CONFIG" "http://$CONSUL_ADDR/v1/agent/service/register")
+CONSUL_RESP=$(curl -X PUT -d "$SERVICE_CONFIG" "http://$ELASTICSEARCH_CONSUL_ADDR/v1/agent/service/register")
 
 if [ "$CONSUL_RESP" == "" ]; then
   echo "Service registered"
