@@ -34,14 +34,16 @@ if [ -z ${ELASTICSEARCH_SERVICE_ID+x} ]; then
 fi
 
 # Put values in the service config file
-sed -i "s/CONSUL_NODE_NAME/${ELASTICSEARCH_NODE_NAME}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
-sed -i "s/CONSUL_NODE_ADDR/${ELASTICSEARCH_NODE_ADDR}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
-sed -i "s/CONSUL_SERVICE_ADDR/${ELASTICSEARCH_SERVICE_ADDR}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
-sed -i "s/CONSUL_SERVICE_NAME/${ELASTICSEARCH_SERVICE_NAME}/g" "/usr/share/elasticsearch/config/elasticsearch.yml"
-sed -i "s/CONSUL_SERVICE_NAME/${ELASTICSEARCH_SERVICE_NAME}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
-sed -i "s/CONSUL_SERVICE_ID/${ELASTICSEARCH_SERVICE_ID}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
+sed -i "s/ELASTICSEARCH_NODE_NAME/${ELASTICSEARCH_NODE_NAME}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
+sed -i "s/ELASTICSEARCH_NODE_ADDR/${ELASTICSEARCH_NODE_ADDR}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
+sed -i "s/ELASTICSEARCH_SERVICE_ADDR/${ELASTICSEARCH_SERVICE_ADDR}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
+sed -i "s/ELASTICSEARCH_SERVICE_NAME/${ELASTICSEARCH_SERVICE_NAME}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
+sed -i "s/ELASTICSEARCH_SERVICE_ID/${ELASTICSEARCH_SERVICE_ID}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
 sed -i "s/ELASTICSEARCH_USER/${ELASTICSEARCH_USER}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
 sed -i "s/ELASTICSEARCH_PASS/${ELASTICSEARCH_PASS}/g" "/usr/share/elasticsearch/elasticsearch-service.json"
+
+sed -i "s/ELASTICSEARCH_SERVICE_ADDR/${ELASTICSEARCH_SERVICE_ADDR}/g" "/usr/share/elasticsearch/config/elasticsearch.yml"
+sed -i "s/ELASTICSEARCH_SERVICE_NAME/${ELASTICSEARCH_SERVICE_NAME}/g" "/usr/share/elasticsearch/config/elasticsearch.yml"
 
 SERVICE_CONFIG=$(cat /usr/share/elasticsearch/elasticsearch-service.json)
 CONSUL_RESP=$(curl -X PUT -d "$SERVICE_CONFIG" "http://$ELASTICSEARCH_CONSUL_ADDR/v1/agent/service/register")

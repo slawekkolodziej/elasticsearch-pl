@@ -2,12 +2,11 @@ FROM elasticsearch:5.6.3-alpine
 MAINTAINER Slawek Kolodziej <hfrntt@gmail.com>
 RUN apk add --no-cache 'su-exec>=0.2' curl
 
-
 RUN elasticsearch-plugin install analysis-stempel
 RUN yes | elasticsearch-plugin install https://github.com/vvanholl/elasticsearch-consul-discovery/releases/download/5.6.3.0/elasticsearch-consul-discovery-5.6.3.0.zip
 ENV ES_JAVA_OPTS -Xms512m -Xmx512m
 
-HEALTHCHECK --timeout=5s CMD curl --silent -O http://$HOSTNAME:9200/_cat/health
+HEALTHCHECK --timeout=5s CMD curl --silent --fail http://localhost:9200/_cat/health || exit 1
 
 RUN mkdir -p /usr/share/elasticsearch/data && chown elasticsearch:elasticsearch /usr/share/elasticsearch/data
 

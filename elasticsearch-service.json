@@ -1,11 +1,11 @@
 {
-  "ID": "CONSUL_SERVICE_ID",
-  "Name": "CONSUL_SERVICE_NAME",
+  "ID": "ELASTICSEARCH_SERVICE_ID",
+  "Name": "ELASTICSEARCH_SERVICE_NAME",
   "Tags": [],
-  "Address": "CONSUL_SERVICE_ADDR",
+  "Address": "ELASTICSEARCH_SERVICE_ADDR",
   "Port": 9200,
   "Check": {
-    "Script": "curl -v ELASTICSEACH_USER:ELASTICSEARCH_PASS@localhost:9200/_cluster/health | grep '\"status\":\"green\"' && printf 'OK' || { printf 'NO OK' 1>&2; exit 1; }",
+    "Script": "curl --silent --fail http://localhost:9200/_cat/health || exit 1",
     "Interval": "10s",
     "DeregisterCriticalServiceAfter": "2m"
   }

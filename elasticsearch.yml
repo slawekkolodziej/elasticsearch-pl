@@ -1,7 +1,11 @@
+network:
+  host:
+    - localhost
+    - ELASTICSEARCH_SERVICE_ADDR
 discovery:
   type: consul
   consul:
-    service-names: ["CONSUL_SERVICE_NAME"]
+    service-names: ["ELASTICSEARCH_SERVICE_NAME"]
     healthy: true
     local-ws-port: 8500
-    local-ws-host: localhost
+    local-ws-host: ELASTICSEARCH_SERVICE_ADDR
