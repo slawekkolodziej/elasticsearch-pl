@@ -7,9 +7,7 @@ ENV ES_JAVA_OPTS -Xms512m -Xmx512m
 RUN mkdir -p /usr/share/elasticsearch/data && chown elasticsearch:elasticsearch /usr/share/elasticsearch/data
 VOLUME /usr/share/elasticsearch/data
 
-RUN mkdir /etc/elasticsearch && chown elasticsearch:elasticsearch /etc/elasticsearch
-COPY elasticsearch-service.json /etc/elasticsearch/elasticsearch-service.json
-
+COPY elasticsearch-service.json /usr/share/elasticsearch/elasticsearch-service.json
 COPY elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
